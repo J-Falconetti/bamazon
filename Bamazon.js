@@ -21,13 +21,36 @@ connection.connect(function(err) {
 });
 
 function startBam() {
-    console.log("this is a good thing")
+    console.log("loading Items")
+    queryAllItems()
 
+
+function queryAllItems() {
+    connection.query('SELECT * FROM products', function(err, res){
+        if(err) throw err;          
+      for (var i = 0; i < res.length; i++) {
+        console.log(res[i].item_id + " | " + res[i].product_name + " | " + res[i].price + " | ");
+      }
+      console.log("-----------------------------------");
+    });
 }
-
-
+}
 // Running this application will first display all of the items available for sale. Include the ids, names, and prices of products for sale.
-
+// CREATE TABLE products (
+// item_id INTEGER(11) AUTO_INCREMENT NOT NULL,
+// product_name VARCHAR(255),
+// department_name VARCHAR(255),
+// price DECIMAL(10,2) NULL,
+// stock_quantity INTEGER(15),
+// PRIMARY KEY (item_id)
+// );
+//     item_id INTEGER(11) AUTO_INCREMENT NOT NULL,
+//     product_name VARCHAR(255),
+//     department_name VARCHAR(255),
+//     price DECIMAL(10,2) NULL,
+//     stock_quantity INTEGER(15),
+//     PRIMARY KEY (item_id)
+//     );
 // The app should then prompt users with two messages.
 
 // The first should ask them the ID of the product they would like to buy.
