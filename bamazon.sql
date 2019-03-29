@@ -1,3 +1,4 @@
+--RERUN ALL THIS PRICE WAS INSERTED WONG 3/27 GIT PULLS
 -- SQL files
 -- Bamazon
 DROP DATABASE IF EXISTS bamazon_db;
@@ -10,7 +11,7 @@ CREATE TABLE products (
 item_id INTEGER(11) AUTO_INCREMENT NOT NULL,
 product_name VARCHAR(255),
 department_name VARCHAR(255),
-price INTEGER(15),
+price DECIMAL(10,2) NULL,
 stock_quantity INTEGER(15),
 PRIMARY KEY (item_id)
 );
