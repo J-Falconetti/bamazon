@@ -1,7 +1,7 @@
 {
   "name": "bamazon",
-  "version": "0.0.5",
-  "description": "bamazon market place",
+  "version": "1.0.0",
+  "description": "Bamazon app",
   "main": "Bamazon.js",
   "dependencies": {
     "cli-table": "^0.3.1",
@@ -16,10 +16,6 @@
     "type": "git",
     "url": "git+https://github.com/J-Falconetti/bamazon.git"
   },
-  "keywords": [
-    "bamazon",
-    "homework"
-  ],
   "author": "Joseph Falconetti",
   "license": "ISC",
   "bugs": {
