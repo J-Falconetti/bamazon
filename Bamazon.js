@@ -79,7 +79,7 @@ function purchasePrompt() {
       var item = parseInt(order.ID)
       // var item = order.ID;
       console.log("this is the item", item)
-      var qty = order.Quantity;
+      var qty = parseInt(order.Quantity);
       console.log(qty)
       connection.query(
         "SELECT * FROM products where id=" + item + ";",
@@ -95,18 +95,18 @@ function purchasePrompt() {
             console.log("Thanks for putting the Bam! in Bamazn");
             console.log("You owe $" + total);
             console.log("");
-        //     //inventory update
-        // connection.query('UPDATE products SET ? Where ?', [{
-        //   stock_quantity: res[0].stock_quantity - order.Quantity
-        // },{
-          
-        // }], function(err, res){});
-        // startBam()
-            connection.query("UPDATE products SET stock_quantity = stock_quantity - ? Where id = ?", [
-              [qty, item], function(err,res){
-			  if (err) throw err;
-			  console.log(res)
-              }]);
+         //inventory update
+        connection.query('UPDATE products SET ? Where ?', [{
+          stock_quantity: res[0].stock_quantity - order.Quantity
+        },{
+          id: item
+        }], function(err, res){});
+        startBam()
+        //     connection.query("UPDATE products SET stock_quantity = stock_quantity - ? Where id = ?", [
+        //       [qty, item], function(err,res){
+			  // if (err) throw err;
+			  // console.log(res)
+              // }]);
           }
         }
       );
