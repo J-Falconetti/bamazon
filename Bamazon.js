@@ -44,7 +44,7 @@ function queryAllItems() {
       // ]);
       // console.log(Table.toString());
       console.log(
-        res[i].item_id +
+        res[i].id +
           " | " +
           res[i].product_name +
           " | " +
@@ -82,7 +82,7 @@ function purchasePrompt() {
       var qty = order.Quantity;
       console.log(qty)
       connection.query(
-        "SELECT * FROM products where item_id=" + item + ";",
+        "SELECT * FROM products where id=" + item + ";",
         function(err, res) {
           if (err) throw err;
           console.log(res);
@@ -95,15 +95,18 @@ function purchasePrompt() {
             console.log("Thanks for putting the Bam! in Bamazn");
             console.log("You owe $" + total);
             console.log("");
-            //inventory update
-            connection.query("UPDATE products SET ? Where ?", [
-              {
-                stock_quantity: res[0].stock_quantity - qty
-              },
-              {
-                // id: item_id
-              }
-            ]);
+        //     //inventory update
+        // connection.query('UPDATE products SET ? Where ?', [{
+        //   stock_quantity: res[0].stock_quantity - order.Quantity
+        // },{
+          
+        // }], function(err, res){});
+        // startBam()
+            connection.query("UPDATE products SET stock_quantity = stock_quantity - ? Where id = ?", [
+              [qty, item], function(err,res){
+			  if (err) throw err;
+			  console.log(res)
+              }]);
           }
         }
       );
