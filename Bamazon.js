@@ -30,19 +30,9 @@ function startBam() {
 function queryAllItems() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
-    // var displayTable = new Table ({
-    // 	head: ["Item ID", "Product Name", "Price"],
-    //     colWidths: [10,25,14]
-
-    // });
-    for (var i = 0; i < res.length; i++) {
+        for (var i = 0; i < res.length; i++) {
       
-      // displayTable.push([
-      //     res[i].item_id,
-      //     res[i].product_name,
-      //     res[i].price
-      // ]);
-      // console.log(Table.toString());
+      
       console.log(
         res[i].id +
           " | " +
@@ -85,16 +75,19 @@ function purchasePrompt() {
         "SELECT * FROM products where id=" + item + ";",
         function(err, res) {
           if (err) throw err;
-          console.log(res);
+          // console.log(res);
 
           if (qty > res[0].stock_quantity) {
-            console.log("go to Amazon");
+            console.log("Sorry we do not have that many...There are times it pays to have Amazon Prime");
+            console.log("Try a smaller quanity")
             startBam();
           } else {
             total = res[0].price * qty;
             console.log("Thanks for putting the Bam! in Bamazn");
+            console.log("you are the best Bam! part about us");
             console.log("You owe $" + total);
             console.log("");
+
          //inventory update
         connection.query('UPDATE products SET ? Where ?', [{
           stock_quantity: res[0].stock_quantity - order.Quantity
@@ -102,11 +95,7 @@ function purchasePrompt() {
           id: item
         }], function(err, res){});
         startBam()
-        //     connection.query("UPDATE products SET stock_quantity = stock_quantity - ? Where id = ?", [
-        //       [qty, item], function(err,res){
-			  // if (err) throw err;
-			  // console.log(res)
-              // }]);
+     
           }
         }
       );
