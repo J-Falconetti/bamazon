@@ -3,9 +3,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
 
-
-//  var Table = require("cli-table");
-
 // Setting connection to SQL db
 var connection = mysql.createConnection({
   host: "localhost",
@@ -21,7 +18,7 @@ connection.connect(function(err) {
   console.log("connected as id " + connection.threadId + "\n");
   startBam();
 });
-
+// statring progran
 function startBam() {
   console.log("loading Items");
   queryAllItems();
@@ -65,17 +62,12 @@ function purchasePrompt() {
       }
     ])
     .then(function(order) {
-      console.log(order);
       var item = parseInt(order.ID)
-      // var item = order.ID;
-      console.log("this is the item", item)
       var qty = parseInt(order.Quantity);
-      console.log(qty)
       connection.query(
         "SELECT * FROM products where id=" + item + ";",
         function(err, res) {
           if (err) throw err;
-          // console.log(res);
 
           if (qty > res[0].stock_quantity) {
             console.log("Sorry we do not have that many...There are times it pays to have Amazon Prime");
